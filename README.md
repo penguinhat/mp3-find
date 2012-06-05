@@ -20,7 +20,6 @@ Use mpfind to get a null seperated list of all songs by Kesha in current working
 TODO
 ----
 
-Give nicer error if eyeD3 doesn't exist
 Look into using another library to parse mp3 tags?
     Need one that is simple for users to install
     Need one that is simple to use

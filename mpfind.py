@@ -1,9 +1,19 @@
 #!/usr/bin/env python
 
-import eyeD3 #TODO: Give nicer error if this doesn't exist
-import argparse
-import filters
 import sys, os
+import argparse
+
+try:
+    import eyeD3 
+except ImportError:
+    print "Sorry, I can't find the eyeD3 package I need to read mp3 tags."
+    print "\nHave you installed eyeD3? If not, you should be able to do this using\nsudo apt-get install eyeD3.\n"
+    print "If you are still having problems after trying that, then try visiting the eyeD3 website at http://eyed3.nicfit.net/"
+
+    sys.exit(1)
+    #TODO: Write better copy for this error message.
+
+import filters
 
 path = os.getcwd()
 
