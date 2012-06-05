@@ -1,7 +1,7 @@
 mpfind
 ======
 
-Command line tool like find but works on mp3 metadata
+A command line tool like find to filter mp3 files by mp3 metadata
 
 Requirements
 ------------
