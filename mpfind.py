@@ -5,9 +5,6 @@ import argparse
 import filters
 import sys, os
 
-#Take in args
-# mpfind [expressions]
-
 path = os.getcwd()
 
 #TODO: Tidy up
@@ -17,6 +14,9 @@ parser = argparse.ArgumentParser(description='search for mp3 files using filters
 parser.add_argument('--artist',help='Filter by artist name, will return *<artist>*')
 parser.add_argument('--title',help='Filter by title name, will return *<title>*')
 parser.add_argument('--album',help='Filter by album name, will return *<album>*')
+parser.add_argument('-0','--print0',action='store_true',help='Split output by null character instead of by newline (useful if you pipe into xargs -0)')
+#TODO: Add positition dir argument?
+#TODO: Add -r argument
 
 args = parser.parse_args()
 
@@ -69,4 +69,7 @@ for dirpath, dirnames, files in os.walk(os.getcwd()):
 
     files = map(render_path,mp3s)
     for f in files:
-        print f
+        if args.print0:
+            sys.stdout.write('%s\x00' % f) #Seperate with null character
+        else:
+            print f
