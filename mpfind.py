@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import eyeD3
 import filters
 import sys, os
