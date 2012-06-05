@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-import eyeD3
+import eyeD3 #TODO: Give nicer error if this doesn't exist
+import argparse
 import filters
 import sys, os
 
@@ -10,25 +11,29 @@ import sys, os
 path = os.getcwd()
 
 #TODO: Tidy up
-#TODO: Add --help
-#TODO: Validate input (use a proper library for this)
+
+parser = argparse.ArgumentParser(description='search for mp3 files using filters based on mp3 metadata')
+
+parser.add_argument('--artist',help='Filter by artist name, will return *<artist>*')
+parser.add_argument('--title',help='Filter by title name, will return *<title>*')
+parser.add_argument('--album',help='Filter by album name, will return *<album>*')
+
+args = parser.parse_args()
 
 filter_map = {
-    '-artist':filters.get_artist,
-    '-title':filters.get_title,
-    '-album':filters.get_album,
+    'artist':filters.get_artist,
+    'title':filters.get_title,
+    'album':filters.get_album,
     #TODO: Add more filters 
 }
 
+
 filters = [] #List of (function,argument) tuples to filter argument by
 
-func = None
-for arg in sys.argv[1:]:
-    if func:
-        filters.append( (func,arg) )
-        func = None
-    else:
-        func = filter_map[arg]
+for key, func in filter_map.iteritems():
+    value = getattr(args,key)
+    if value:
+        filters.append( (func,value) )
 
 def run_filters(mp3):
     """Takes in a path to an mp3 files and runs all the filters
