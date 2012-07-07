@@ -3,6 +3,8 @@ mpfind
 
 A command line tool like find to filter mp3 files by mp3 metadata
 
+I'm probably not going to do any more work on this because I've decided to just pay for Spotify, but maybe you'll find this useful, mystery reader!
+
 Requirements
 ------------
 
